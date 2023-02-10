@@ -59,7 +59,6 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadScene(string scene)
     {
-        Debug.Log(scene + "////");
         Time.timeScale = 1f;
         SceneManager.LoadScene(scene);
     }

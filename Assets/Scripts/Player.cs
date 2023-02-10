@@ -68,8 +68,7 @@ public class Player : MonoBehaviour
                     m_pastRotationX = m_x;
                 }
             }
-        }
-        else Physics2D.IgnoreLayerCollision(8,9);
+        }else Physics2D.IgnoreLayerCollision(8,9);
         if (m_boxColli.IsTouchingLayers(m_layer))
         {
             if (m_isHurt && m_rg.velocity.y == 0)
@@ -144,8 +143,13 @@ public class Player : MonoBehaviour
             if (!m_isHurt)
             {
                 heart--;
-                if (heart <= 0) m_boxColli.isTrigger = true;
                 m_isHurt = true;
+                if (heart <= 0)
+                {
+                    m_rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                    m_anim.SetTrigger("Death");
+                    return;
+                }
                 int direct = 1;
                 if (col.gameObject.transform.position.x > transform.position.x)
                     direct = -1;
