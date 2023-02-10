@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - LimitTopPlayer
+  - CamCollider
+  - Enemy
+  - Ground
+  - Wall
+  - DeathZone
+  - FinishZone
+  - DeathPointEnemy
+  - Item
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Ground
+  - Water
+  - UI
+  - Background
+  - Wall
+  - Enemy
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 1972949965
+    locked: 0
+  - name: Background2
+    uniqueID: 884479011
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Wall
+    uniqueID: 2903368067
+    locked: 0
+  - name: Ground
+    uniqueID: 1656676693
+    locked: 0
+  - name: PlayerOrEnemy
+    uniqueID: 3882581249
+    locked: 0
+  - name: UI
+    uniqueID: 3445024985
+    locked: 0
