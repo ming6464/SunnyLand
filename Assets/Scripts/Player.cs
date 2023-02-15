@@ -2,7 +2,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.Tilemaps;
 public class Player : MonoBehaviour
 {
     public float speed,positionXMin,positionXMax;
@@ -197,6 +197,8 @@ public class Player : MonoBehaviour
                 GameManager.Ins.IncreaseScore(item.score);
             }
         }
+
+        
         
     }
     void AnimHurt(int direct)

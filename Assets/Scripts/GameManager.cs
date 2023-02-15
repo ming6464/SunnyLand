@@ -8,7 +8,6 @@ public class GameManager : Singleton<GameManager>
     private int m_score, m_bestScore;
     public override void Awake()
     {
-       // base.Awake();
         m_bestScore = PrefConsts.Ins.BestScore;
     }
 
@@ -30,6 +29,7 @@ public class GameManager : Singleton<GameManager>
     {
         UIManager.Ins.UpBestScore(m_bestScore);
         UIManager.Ins.UpScore(m_score);
+        Debug.Log(m_score + "/" + m_bestScore);
     }
 
     public void IncreaseScore(int buff)
