@@ -14,8 +14,9 @@ public class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         anim = GetComponent<Animator>();
-        UpdateActiveAnimator(false);
         rigid = GetComponent<Rigidbody2D>();
+        UpdateActiveAnimator(false);
+        
     }
 
     protected virtual void Start()
