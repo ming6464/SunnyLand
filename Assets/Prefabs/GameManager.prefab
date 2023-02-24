@@ -44,5 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fedd2442c9f342109cd20b6dd71ef492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backHole: {fileID: 1585273581798929664, guid: e2155ad93d8ca154396486122932d9cd, type: 3}
+  tlm_ground: {fileID: 0}
+  tlm_wall: {fileID: 0}
   isOverGame: 0
   isPause: 0
+  isUseSkill: 0
+  isScreenHome: 0
+  amountOfBlackHoleSkill: 99

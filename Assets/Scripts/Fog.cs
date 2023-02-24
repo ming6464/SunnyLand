@@ -108,13 +108,10 @@ public class Fog : Enemy
         GameObject gObj = col.gameObject;
         if (gObj.CompareTag(TagAndKey.T_GROUND))
         {
-            if (m_coll.IsTouchingLayers(m_layerGround))
-            {
-                this.rigid.velocity = Vector2.zero;
-                m_state = State.Idle;
-                m_isJumped = false;
-                UpdateStateAnimator();
-            }
+            this.rigid.velocity = Vector2.zero;
+            m_state = State.Idle;
+            m_isJumped = false;
+            UpdateStateAnimator();
         }
         else if (gObj.CompareTag(TagAndKey.T_WALL))
             this.rigid.velocity = Vector2.zero;

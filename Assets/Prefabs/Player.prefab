@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1937255399}
   - component: {fileID: 1937255401}
   - component: {fileID: 6073137941060807669}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: SlideRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 3840660078054329483}
   - component: {fileID: 3840660078054329481}
   - component: {fileID: 3840660078054329480}
+  - component: {fileID: 1698302465}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -125,6 +126,7 @@ MonoBehaviour:
   isGround: 0
   isJump: 0
   isBlockDirect: 0
+  isFinish: 0
   speed: 5
   positionXMin: -8.18
   positionXMax: 277.79
@@ -252,6 +254,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1698302465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840660078054329482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5814a09242c479983459efab343a575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4651505211718780765
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +277,7 @@ GameObject:
   - component: {fileID: 7973772728482976577}
   - component: {fileID: 4316951852238671969}
   - component: {fileID: 4998446058164223336}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: SlideBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}

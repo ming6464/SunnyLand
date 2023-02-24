@@ -5,8 +5,8 @@ using TMPro;
 
 public class UIManager : Singleton<UIManager>
 {
-    public TextMeshProUGUI scoreText, bestScoreText;
-    public GameObject gamePause;
+    public TextMeshProUGUI scoreText, bestScoreText,blackHoleText;
+    public GameObject gamePause,useSkillPanel;
     public OverOrFinishDialog gameOverDialog;
     public override void Awake()
     {
@@ -45,4 +45,24 @@ public class UIManager : Singleton<UIManager>
             Time.timeScale = 1;
         gamePause.SetActive(isShow);
     }
+
+    public void UpdateSkill(int amount, int state)
+    {
+        switch (state)
+        {
+            case 1 :
+                blackHoleText.text = " x" + amount;
+                break;
+        }
+    }
+
+    public void SetActiveSkillPanel(bool isActive)
+    {
+        if(isActive)
+            Time.timeScale = 0.01f;
+        else
+            Time.timeScale = 1f;
+        useSkillPanel.SetActive(isActive);
+    }
+    
 }

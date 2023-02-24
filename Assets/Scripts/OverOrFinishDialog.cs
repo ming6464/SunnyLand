@@ -4,11 +4,12 @@ using UnityEngine;
 using TMPro;
 public class OverOrFinishDialog : MonoBehaviour
 {
-    public TextMeshProUGUI amountCherryText, amountGemText,amountEnemyKillText;
+    public TextMeshProUGUI amountCherryText, amountGemText,amountEnemyKillText,curChapterText;
     public GameObject nextChapPanel;
+    public string curChapter;
     void Start()
     {
-        
+        curChapterText.text = curChapter;
     }
 
     // Update is called once per frame

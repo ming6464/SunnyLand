@@ -11,12 +11,12 @@ public class Player : MonoBehaviour
     private SlideBottomPlayer m_slideBottom;
     private SlideRightPlayer m_slideRight;
     private Animator m_anim;
-    private float m_x, m_curRotateX,m_velocHurtX,m_jumpTime,m_jumpStartTime;
+    private float m_btnVertical, m_curRotateX,m_velocHurtX,m_jumpTime,m_jumpStartTime,m_btnHorizontal,m_x,m_horizontal;
     private Rigidbody2D m_rg;
     private BoxCollider2D m_boxCol;
     private Vector2 m_vt2_velocJump;
-    private string m_animState;
-    
+    private string m_animState,m_curAnimState;
+
     void Start()
     {
         isBlockDirect = false;
@@ -39,11 +39,15 @@ public class Player : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8,9,isHurt);
         if(!isFinish && !isHurt)
             UpdateAnimationAndRun();
+        CamController.Ins.Running(transform.position);
+        
     }
 
     void UpdateAnimationAndRun()
     {
-        m_x = Input.GetAxisRaw("Horizontal");
+        m_horizontal = Input.GetAxisRaw("Horizontal");
+        if (m_horizontal != 0) m_x = m_horizontal;
+        else m_x = m_btnHorizontal;
         if(m_x != 0)
         {
             if (!isBlockDirect)
@@ -60,7 +64,7 @@ public class Player : MonoBehaviour
         }
         if (isGround && !isJump)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || m_btnVertical > 0)
             {
                 m_jumpStartTime = m_jumpTime;
                 m_animState = TagAndKey.A_PLAYER_JUMPUP;
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour
         }
         if (isJump)
         {
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.UpArrow) || m_btnVertical > 0)
             {
                 m_jumpStartTime -= Time.deltaTime;
                 if (m_jumpStartTime > 0)
@@ -82,7 +86,7 @@ public class Player : MonoBehaviour
             else isJump = false;
         }else if (!isGround && m_rg.velocity.y <= 0) m_animState = TagAndKey.A_PLAYER_FALL;
         UpdateAnimation();
-        CamController.Ins.Running(transform.position.x, transform.position.y);
+        
     }
 
     private void UpdateSizeCol()
@@ -108,8 +112,12 @@ public class Player : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        m_anim.Play(m_animState);
+        if (string.Equals(m_animState, m_curAnimState)) return;
+        m_curAnimState = m_animState;
+        m_anim.Play(m_curAnimState);
         UpdateSizeCol();
+        if(string.Equals(m_curAnimState,TagAndKey.A_PLAYER_JUMPUP))
+            AudioManager.Ins.PlayAudioEffect(1,0.3f);
     }
     
     public void AnimHurt(int direct)
@@ -128,7 +136,7 @@ public class Player : MonoBehaviour
         m_anim.SetTrigger("Death");
     }
     
-    void Death()
+    public void Death()
     {
         UpDataCollected();
         GameManager.Ins.GameOver();
@@ -156,4 +164,14 @@ public class Player : MonoBehaviour
         UpdateAnimation();
     }
 
+    public void ActionBtnHorizontal(int direct)
+    {
+        m_btnHorizontal = direct;
+    }
+
+    public void ActionBtnVertical(int direct)
+    {
+        m_btnVertical = direct;
+    }
+    
 }

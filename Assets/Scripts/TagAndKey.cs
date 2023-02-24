@@ -6,6 +6,7 @@ public static class TagAndKey
     public const string
         T_PLAYER = "Player",
         T_GROUND = "Ground",
+        T_BACKGROUND = "Background",
         T_DEATHZONE = "DeathZone",
         T_ENEMY = "Enemy",
         T_DEATHPOINTENEMY = "DeathPointEnemy",
@@ -18,5 +19,6 @@ public static class TagAndKey
         A_PLAYER_FALL = "Fall",
         A_PLAYER_CROUND = "Cround",
         A_PLAYER_IDLE = "Idle",
-        A_PLAYER_RUN = "Run";
+        A_PLAYER_RUN = "Run",
+        T_AUDIOSOURCE = "AudioSource";
 }

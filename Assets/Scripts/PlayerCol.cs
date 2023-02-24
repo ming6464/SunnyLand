@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerCol : MonoBehaviour
 {
+    public AudioClip auc_collect;
     private Player m_player;
     private Rigidbody2D m_rg;
 
@@ -27,7 +28,7 @@ public class PlayerCol : MonoBehaviour
         if(gObj.CompareTag(TagAndKey.T_DEATHZONE))
         {
             m_player.heart = 0;
-            m_player.AnimHurt(0);
+            m_player.Death();
         }
         else if (col.gameObject.CompareTag(TagAndKey.T_FINISH))
         {
@@ -53,6 +54,7 @@ public class PlayerCol : MonoBehaviour
                     m_player.amountCherry++;
                 item.Collected();
                 GameManager.Ins.IncreaseScore(item.score);
+                AudioManager.Ins.PlayAudioEffect(2,0.22f);
             }
         }
     }

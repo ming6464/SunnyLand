@@ -11,10 +11,10 @@ public class CamController : Singleton<CamController>
     {
         m_vtCurPosition = transform.position;
     }
-    public void Running(float positionX,float positionY)
+    public void Running(Vector3 pos)
     {
-        m_vtCurPosition.Set(Mathf.Clamp(positionX, minX, maxX)
-            , Mathf.Clamp(positionY, minY, maxY)
+        m_vtCurPosition.Set(Mathf.Clamp(pos.x, minX, maxX)
+            , Mathf.Clamp(pos.y, minY, maxY)
             , m_vtCurPosition.z);
         transform.position = m_vtCurPosition;
         

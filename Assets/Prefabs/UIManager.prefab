@@ -46,5 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
   bestScoreText: {fileID: 0}
+  blackHoleText: {fileID: 0}
   gamePause: {fileID: 0}
+  useSkillPanel: {fileID: 0}
   gameOverDialog: {fileID: 0}
