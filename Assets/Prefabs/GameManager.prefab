@@ -48,7 +48,6 @@ MonoBehaviour:
   tlm_ground: {fileID: 0}
   tlm_wall: {fileID: 0}
   isOverGame: 0
-  isPause: 0
   isUseSkill: 0
   isScreenHome: 0
-  amountOfBlackHoleSkill: 99
+  amountOfBlackHoleSkill: 10

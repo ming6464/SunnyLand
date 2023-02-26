@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
@@ -14,9 +15,8 @@ public class AudioManager : Singleton<AudioManager>
     public override void Start()
     {
         m_aus = GetComponent<AudioSource>();
-        
     }
-
+    
     public void PlayAudioEffect(int state,float vol)
     {
         switch (state)
@@ -36,5 +36,12 @@ public class AudioManager : Singleton<AudioManager>
                 m_aus.PlayOneShot(auc_finsh,vol);
                 break;
         }
+    }
+
+    public void PauseMusic(bool isPause)
+    {
+        if(isPause)
+            m_aus.Pause();
+        else m_aus.Play();
     }
 }

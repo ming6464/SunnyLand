@@ -2,38 +2,30 @@ using UnityEngine;
 
 public class PrefConsts : Singleton<PrefConsts>
 {
-    private const string BESTSCORE = "BESTSCORE",GEM = "GEM",CHERRY = "CHERRY",ENEMYKILL = "ENEMYKILL";
-
-    public int BestScore
-    {
-        get => PlayerPrefs.GetInt(BESTSCORE, 0);
-        set
-        {
-            if (BestScore < value) PlayerPrefs.SetInt(BESTSCORE,value);
-        }
-    }
-    public int Gem
+    private const string GEM = "GEM",CHERRY = "CHERRY",ENEMYKILL = "ENEMYKILL";
+    
+    public int gem
     {
         get => PlayerPrefs.GetInt(GEM, 0);
         set
         {
-            if (Gem != value) PlayerPrefs.SetInt(GEM,value);
+            if (gem != value) PlayerPrefs.SetInt(GEM,value);
         }
     }
-    public int Cherry
+    public int cherry
     {
         get => PlayerPrefs.GetInt(CHERRY, 0);
         set
         {
-            if (Cherry != value) PlayerPrefs.SetInt(CHERRY,value);
+            if (cherry != value) PlayerPrefs.SetInt(CHERRY,value);
         }
     }
-    public int EnemyKill
+    public int enemyKill
     {
         get => PlayerPrefs.GetInt(ENEMYKILL, 0);
         set
         {
-            if (EnemyKill != value) PlayerPrefs.SetInt(ENEMYKILL,value);
+            if (enemyKill != value) PlayerPrefs.SetInt(ENEMYKILL,value);
         }
     }
     

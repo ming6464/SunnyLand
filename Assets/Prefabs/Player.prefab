@@ -132,9 +132,9 @@ MonoBehaviour:
   positionXMax: 277.79
   maxHeart: 3
   heart: 3
-  amountCherry: 0
-  amountGem: 0
-  amountEnemyKill: 0
+  gem: 0
+  cherry: 0
+  kill: 0
 --- !u!212 &3840660078054329486
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5814a09242c479983459efab343a575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  auc_collect: {fileID: 8300000, guid: 5db7afb2f647eb44397f2149aef06715, type: 3}
 --- !u!1 &4651505211718780765
 GameObject:
   m_ObjectHideFlags: 0

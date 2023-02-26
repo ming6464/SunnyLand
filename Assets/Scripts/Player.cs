@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     public bool isHurt,isGround,isJump,isBlockDirect,isFinish;
     public float speed,positionXMin,positionXMax;
-    public int maxHeart, heart, amountCherry, amountGem, amountEnemyKill;
+    public int maxHeart, heart,gem,cherry,kill;
     private SlideBottomPlayer m_slideBottom;
     private SlideRightPlayer m_slideRight;
     private Animator m_anim;
@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        PrefConsts.Ins.enemyKill = 0;
+        PrefConsts.Ins.gem = 0;
+        PrefConsts.Ins.cherry = 0;
         isBlockDirect = false;
         speed = 5;
         m_curRotateX = 1;
@@ -40,7 +43,10 @@ public class Player : MonoBehaviour
         if(!isFinish && !isHurt)
             UpdateAnimationAndRun();
         CamController.Ins.Running(transform.position);
-        
+        gem = PrefConsts.Ins.gem;
+        cherry = PrefConsts.Ins.cherry;
+        kill = PrefConsts.Ins.enemyKill;
+
     }
 
     void UpdateAnimationAndRun()
@@ -138,17 +144,10 @@ public class Player : MonoBehaviour
     
     public void Death()
     {
-        UpDataCollected();
         GameManager.Ins.GameOver();
         Destroy(this.gameObject);
     }
-
-    public void UpDataCollected()
-    {
-        PrefConsts.Ins.Cherry = amountCherry;
-        PrefConsts.Ins.EnemyKill = amountEnemyKill;
-        PrefConsts.Ins.Gem = amountGem;
-    }
+    
     private void ChangeSizeCol(float offX, float offY, float sizeX, float sizeY)
     {
         m_boxCol.offset = new Vector2(offX, offY);
@@ -157,11 +156,22 @@ public class Player : MonoBehaviour
 
     public void JumpKillEnemy()
     {
-        amountEnemyKill++;
+        PrefConsts.Ins.enemyKill++;
         m_rg.velocity = m_vt2_velocJump;
         m_animState = TagAndKey.A_PLAYER_JUMPUP;
         isJump = true;
         UpdateAnimation();
+    }
+
+    public void CollectItem(bool isGem)
+    {
+        if (isGem)
+        {
+            PrefConsts.Ins.gem++;
+            return;
+        }
+
+        PrefConsts.Ins.cherry ++;
     }
 
     public void ActionBtnHorizontal(int direct)

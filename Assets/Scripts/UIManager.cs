@@ -5,9 +5,9 @@ using TMPro;
 
 public class UIManager : Singleton<UIManager>
 {
-    public TextMeshProUGUI scoreText, bestScoreText,blackHoleText;
-    public GameObject gamePause,useSkillPanel;
-    public OverOrFinishDialog gameOverDialog;
+    public TextMeshProUGUI scoreText,blackHoleText;
+    public GameObject useSkillPanel;
+    public Dialog dialog;
     public override void Awake()
     {
 
@@ -27,23 +27,29 @@ public class UIManager : Singleton<UIManager>
     {
         if(scoreText) scoreText.SetText(score.ToString());
     }
-
-    public void UpBestScore(int score)
+    public void ShowOverDialog()
     {
-        if(bestScoreText) bestScoreText.SetText(score.ToString());
-    }
-    public void ShowOverDialog(bool isFinish)
-    {
-        gameOverDialog.Show(isFinish);
+        dialog.ShowDialog(2);
     }
 
-    public void ShowOrHideGamePause(bool isShow)
+    public void ShowFinshDialog()
+    {
+        dialog.ShowDialog(1);
+    }
+
+    public void ShowPauseDialog(bool isShow)
     {
         if (isShow)
+        {
             Time.timeScale = 0f;
+            AudioManager.Ins.PauseMusic(true);
+        }
         else
+        {
             Time.timeScale = 1;
-        gamePause.SetActive(isShow);
+            AudioManager.Ins.PauseMusic(false);
+        }
+        dialog.ShowDialog(3,isShow);
     }
 
     public void UpdateSkill(int amount, int state)

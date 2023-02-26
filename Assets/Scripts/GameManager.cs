@@ -8,20 +8,18 @@ public class GameManager : Singleton<GameManager>
 {
     public BlackHole backHole;
     public Tilemap tlm_ground, tlm_wall;
-    public bool isOverGame,isPause,isUseSkill,isScreenHome;
+    public bool isOverGame,isUseSkill,isScreenHome;
     public int amountOfBlackHoleSkill;
-    private int m_score, m_bestScore,m_countMouseClick;
+    private int m_score,m_countMouseClick;
     private Vector3 m_mouseClickPos;
     private BlackHole m_backHoleA,m_backHoleB;
     public override void Awake()
     {
-        m_bestScore = PrefConsts.Ins.BestScore;
     }
     
     public override void Start()
     {
         if (isScreenHome) return;
-        UIManager.Ins.UpBestScore(m_bestScore);
         UIManager.Ins.UpScore(m_score);
         UIManager.Ins.UpdateSkill(amountOfBlackHoleSkill,1);
         
@@ -31,11 +29,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (isScreenHome || isOverGame) return;
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isPause = !isPause;
-            GamePause();
-        }
-
+            UIManager.Ins.ShowPauseDialog(true);
         if (m_countMouseClick > 0)
         {
             if (Input.GetMouseButtonDown(0))
@@ -67,13 +61,7 @@ public class GameManager : Singleton<GameManager>
     {
         m_score += buff;
         UIManager.Ins.UpScore(m_score);
-        if (m_score > m_bestScore)
-        {
-            m_bestScore = m_score;
-            UIManager.Ins.UpBestScore(m_bestScore);
-            PrefConsts.Ins.BestScore = m_bestScore;
-        }
-        
+
     }
 
     public void GameOver()
@@ -81,12 +69,7 @@ public class GameManager : Singleton<GameManager>
         AudioManager.Ins.PlayAudioEffect(3,0.5f);
         DestroyAllEnemyOnScene();
         isOverGame = true;
-        UIManager.Ins.ShowOverDialog(false);
-    }
-
-    void GamePause()
-    {
-        UIManager.Ins.ShowOrHideGamePause(isPause);
+        UIManager.Ins.ShowOverDialog();
     }
 
     public void LoadScene(string scene)
@@ -99,10 +82,10 @@ public class GameManager : Singleton<GameManager>
     {
         AudioManager.Ins.PlayAudioEffect(9,0.5f);
         DestroyAllEnemyOnScene();
-        UIManager.Ins.ShowOverDialog(true);
+        UIManager.Ins.ShowFinshDialog();
     }
 
-    void DestroyAllEnemyOnScene()
+    private void DestroyAllEnemyOnScene()
     {
         foreach (Enemy e in FindObjectsOfType<Enemy>())
         {

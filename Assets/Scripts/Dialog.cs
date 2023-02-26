@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class OverOrFinishDialog : MonoBehaviour
+public class Dialog : MonoBehaviour
 {
     public TextMeshProUGUI amountCherryText, amountGemText,amountEnemyKillText,curChapterText;
-    public GameObject nextChapPanel;
+    public GameObject nextChapBtn,resumeBtn;
     public string curChapter;
     void Start()
     {
@@ -25,10 +25,18 @@ public class OverOrFinishDialog : MonoBehaviour
         amountEnemyKillText.SetText("x" + enemyKill);
     }
 
-    public void Show(bool isFinish)
+    public void ShowDialog(int state, bool isShow = true)
     {
-        UpData(PrefConsts.Ins.Cherry,PrefConsts.Ins.Gem,PrefConsts.Ins.EnemyKill);
-        nextChapPanel.SetActive(isFinish);
-        this.gameObject.SetActive(true);
+        gameObject.SetActive(isShow);
+        if (!isShow) return;
+        nextChapBtn.SetActive(false);
+        resumeBtn.SetActive(false);
+        UpData(PrefConsts.Ins.cherry, PrefConsts.Ins.gem, PrefConsts.Ins.enemyKill);
+        if (state != 2)
+        {
+            if (state == 1)
+                nextChapBtn.SetActive(true);
+            else resumeBtn.SetActive(true);
+        }
     }
 }

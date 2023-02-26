@@ -6,6 +6,7 @@ public class PlayerCol : MonoBehaviour
     public AudioClip auc_collect;
     private Player m_player;
     private Rigidbody2D m_rg;
+    private bool m_isCheck;
 
     private void Start()
     {
@@ -33,7 +34,6 @@ public class PlayerCol : MonoBehaviour
         else if (col.gameObject.CompareTag(TagAndKey.T_FINISH))
         {
             m_player.isFinish = true;
-            m_player.UpDataCollected();
             GameManager.Ins.Finish();
         }
         else
@@ -48,10 +48,10 @@ public class PlayerCol : MonoBehaviour
             if (gObj.CompareTag(TagAndKey.T_ITEM))
             {
                 Item item = gObj.GetComponent<Item>();
+                m_isCheck = false;
                 if (item.score == 50)
-                    m_player.amountGem++;
-                else
-                    m_player.amountCherry++;
+                    m_isCheck = true;
+                m_player.CollectItem(m_isCheck);
                 item.Collected();
                 GameManager.Ins.IncreaseScore(item.score);
                 AudioManager.Ins.PlayAudioEffect(2,0.22f);

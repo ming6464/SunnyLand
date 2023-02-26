@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
-        UpdateActiveAnimator(false);
+        ActiveAnimator(false);
         
     }
 
@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-    public void UpdateActiveAnimator(bool isActive)
+    public void ActiveAnimator(bool isActive)
     {
         anim.enabled = isActive;
     }
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     {
         if (col.gameObject.CompareTag(TagAndKey.T_MAINCAM) && !anim.enabled)
         {
-            UpdateActiveAnimator(true);
+            ActiveAnimator(true);
         }
         if(col.gameObject.CompareTag(TagAndKey.T_DEATHZONE))
             End();
