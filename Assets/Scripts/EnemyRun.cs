@@ -46,7 +46,7 @@ public class EnemyRun : Enemy
                 transform.position += Vector3.right * velocityOnSecond * m_direction * Time.deltaTime;
             }
         }else if ((CamController.Ins.transform.position.x - transform.position.x) *
-                  (positionEndX - CamController.Ins.transform.position.x) >= 0) this.ActiveAnimator(true);
+                      (positionEndX - CamController.Ins.transform.position.x) >= 0 && !GameManager.Ins.isOverGame) this.ActiveAnimator(true);
 
     }
 

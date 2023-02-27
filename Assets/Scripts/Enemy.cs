@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        if(GameManager.Ins.isOverGame && anim.enabled)
+            ActiveAnimator(false);
     }
     public void End()
     {
@@ -43,7 +45,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag(TagAndKey.T_MAINCAM) && !anim.enabled)
+        if (!GameManager.Ins.isOverGame && col.gameObject.CompareTag(TagAndKey.T_MAINCAM) && !anim.enabled)
         {
             ActiveAnimator(true);
         }

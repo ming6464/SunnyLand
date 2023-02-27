@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         AudioManager.Ins.PlayAudioEffect(3,0.5f);
-        DestroyAllEnemyOnScene();
+        //DestroyAllEnemyOnScene();
         isOverGame = true;
         UIManager.Ins.ShowOverDialog();
     }
@@ -81,7 +81,7 @@ public class GameManager : Singleton<GameManager>
     public void Finish()
     {
         AudioManager.Ins.PlayAudioEffect(9,0.5f);
-        DestroyAllEnemyOnScene();
+        //DestroyAllEnemyOnScene();
         UIManager.Ins.ShowFinshDialog();
     }
 

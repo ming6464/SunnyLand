@@ -1,15 +1,9 @@
-using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 public class Player : MonoBehaviour
 {
     public bool isHurt,isGround,isJump,isBlockDirect,isFinish;
     public float speed,positionXMin,positionXMax;
-    public int maxHeart, heart,gem,cherry,kill;
-    private SlideBottomPlayer m_slideBottom;
-    private SlideRightPlayer m_slideRight;
+    public int maxHeart, heart;
     private Animator m_anim;
     private float m_btnVertical, m_curRotateX,m_velocHurtX,m_jumpTime,m_jumpStartTime,m_btnHorizontal,m_x,m_horizontal;
     private Rigidbody2D m_rg;
@@ -31,8 +25,6 @@ public class Player : MonoBehaviour
         m_boxCol = gameObject.GetComponent<BoxCollider2D>();
         m_vt2_velocJump = new Vector2(0, 5 *Mathf.Sqrt(2));
         m_velocHurtX = 5 / Mathf.Sqrt(2);
-        m_slideRight = GetComponentInChildren<SlideRightPlayer>();
-        m_slideBottom = GetComponentInChildren<SlideBottomPlayer>();
         m_jumpTime = 2.65f / m_vt2_velocJump.y;
     }
 
@@ -43,9 +35,6 @@ public class Player : MonoBehaviour
         if(!isFinish && !isHurt)
             UpdateAnimationAndRun();
         CamController.Ins.Running(transform.position);
-        gem = PrefConsts.Ins.gem;
-        cherry = PrefConsts.Ins.cherry;
-        kill = PrefConsts.Ins.enemyKill;
 
     }
 
@@ -94,34 +83,12 @@ public class Player : MonoBehaviour
         UpdateAnimation();
         
     }
-
-    private void UpdateSizeCol()
-    {
-        m_slideRight.UpdateSizeCol(m_animState);
-        m_slideBottom.UpdateSizeCol(m_animState);
-        switch (m_animState)
-        {
-            case TagAndKey.A_PLAYER_CROUND :
-                ChangeSizeCol(0.09434021f,-0.544036f,1.034773f,0.8269477f);
-                break;
-            case TagAndKey.A_PLAYER_JUMPUP:
-                ChangeSizeCol(-0.01080763f,-0.1145868f,0.8272188f,0.9488536f);
-                break;
-            case TagAndKey.A_PLAYER_FALL:
-                ChangeSizeCol(0.000759244f,-0.07572845f,0.804085f,1.213522f);
-                break;
-            default:
-                ChangeSizeCol(-0.01080763f,-0.3015704f,0.8272188f,1.32282f);
-                break;
-        }
-    }
-
+    
     private void UpdateAnimation()
     {
         if (string.Equals(m_animState, m_curAnimState)) return;
         m_curAnimState = m_animState;
         m_anim.Play(m_curAnimState);
-        UpdateSizeCol();
         if(string.Equals(m_curAnimState,TagAndKey.A_PLAYER_JUMPUP))
             AudioManager.Ins.PlayAudioEffect(1,0.3f);
     }

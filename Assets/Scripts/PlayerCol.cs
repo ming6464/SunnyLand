@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerCol : MonoBehaviour
 {
-    public AudioClip auc_collect;
     private Player m_player;
     private Rigidbody2D m_rg;
     private bool m_isCheck;
