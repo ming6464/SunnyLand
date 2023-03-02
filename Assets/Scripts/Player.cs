@@ -13,9 +13,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        PrefConsts.Ins.enemyKill = 0;
-        PrefConsts.Ins.gem = 0;
-        PrefConsts.Ins.cherry = 0;
         isBlockDirect = false;
         speed = 5;
         m_curRotateX = 1;
@@ -31,8 +28,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isFinish) return;
         Physics2D.IgnoreLayerCollision(8,9,isHurt);
-        if(!isFinish && !isHurt)
+        if(!isHurt)
             UpdateAnimationAndRun();
         CamController.Ins.Running(transform.position);
 
@@ -123,23 +121,12 @@ public class Player : MonoBehaviour
 
     public void JumpKillEnemy()
     {
-        PrefConsts.Ins.enemyKill++;
         m_rg.velocity = m_vt2_velocJump;
         m_animState = TagAndKey.A_PLAYER_JUMPUP;
         isJump = true;
         UpdateAnimation();
     }
-
-    public void CollectItem(bool isGem)
-    {
-        if (isGem)
-        {
-            PrefConsts.Ins.gem++;
-            return;
-        }
-
-        PrefConsts.Ins.cherry ++;
-    }
+    
 
     public void ActionBtnHorizontal(int direct)
     {

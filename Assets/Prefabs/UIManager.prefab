@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11094dc0b75f304ba372d339cc21f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
   blackHoleText: {fileID: 0}
+  scoreText: {fileID: 0}
   useSkillPanel: {fileID: 0}
-  dialog: {fileID: 0}

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e303d44574fb4e28843872ca5f3bdae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 15
+  isCheery: 1
 --- !u!212 &7914596477656651236
 SpriteRenderer:
   m_ObjectHideFlags: 0

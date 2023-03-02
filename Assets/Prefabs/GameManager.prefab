@@ -44,10 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fedd2442c9f342109cd20b6dd71ef492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackHolePanel: {fileID: 0}
   backHole: {fileID: 1585273581798929664, guid: e2155ad93d8ca154396486122932d9cd, type: 3}
   tlm_ground: {fileID: 0}
   tlm_wall: {fileID: 0}
   isOverGame: 0
+  isPauseGame: 0
   isUseSkill: 0
   isScreenHome: 0
-  amountOfBlackHoleSkill: 10
+  dialog: {fileID: 0}
+  amountBlackHole: 0
+  amountCherry: 0
+  amountGem: 0
+  amountEnemyKill: 0

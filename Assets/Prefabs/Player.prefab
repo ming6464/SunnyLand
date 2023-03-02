@@ -128,8 +128,8 @@ MonoBehaviour:
   isBlockDirect: 0
   isFinish: 0
   speed: 5
-  positionXMin: -8.18
-  positionXMax: 277.79
+  positionXMin: -2.87
+  positionXMax: 271.37
   maxHeart: 3
   heart: 3
 --- !u!212 &3840660078054329486

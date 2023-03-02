@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     protected Animator anim;
     protected bool isDeath;
     protected Rigidbody2D rigid;
-    public int score;
 
     protected virtual void Awake()
     {
@@ -26,8 +25,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(GameManager.Ins.isOverGame && anim.enabled)
-            ActiveAnimator(false);
     }
     public void End()
     {
