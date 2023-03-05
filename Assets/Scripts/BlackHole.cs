@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlackHole : MonoBehaviour
@@ -23,7 +18,7 @@ public class BlackHole : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (Vector2.Distance(transform.position, col.gameObject.transform.position) > 0.5f)
+        if (Vector2.Distance(transform.position, col.gameObject.transform.position) > 0.6f)
             col.gameObject.transform.position = new Vector3(positionOut.position.x, positionOut.position.y,0f);
     }
 }

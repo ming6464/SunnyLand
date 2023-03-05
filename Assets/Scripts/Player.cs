@@ -1,7 +1,7 @@
 using UnityEngine;
 public class Player : MonoBehaviour
 {
-    public bool isHurt,isGround,isJump,isBlockDirect,isFinish;
+    public bool isHurt,isGround,isJump,isBlockDirect,isWin;
     public float speed,positionXMin,positionXMax;
     public int maxHeart, heart;
     private Animator m_anim;
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isFinish) return;
+        if (isWin) return;
         Physics2D.IgnoreLayerCollision(8,9,isHurt);
         if(!isHurt)
             UpdateAnimationAndRun();
@@ -88,11 +88,12 @@ public class Player : MonoBehaviour
         m_curAnimState = m_animState;
         m_anim.Play(m_curAnimState);
         if(string.Equals(m_curAnimState,TagAndKey.A_PLAYER_JUMPUP))
-            AudioManager.Ins.PlayAudioEffect(1,0.3f);
+            AudioManager.Ins.PlayAudio(TagAndKey.AUDIO_JUMP,true);
     }
     
     public void AnimHurt(int direct)
     {
+        AudioManager.Ins.PlayAudio(TagAndKey.AUDIO_HURT,true);
         isHurt = true;
         m_animState = TagAndKey.A_PLAYER_HURT;
         m_rg.velocity = new Vector2(m_velocHurtX * direct, m_vt2_velocJump.y);

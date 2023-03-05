@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HeartBar : MonoBehaviour
 {
@@ -39,7 +35,7 @@ public class HeartBar : MonoBehaviour
     void CreateHeart(HeartStatus status)
     {
         GameObject newHeart = Instantiate(heartPrefabs);
-        newHeart.transform.SetParent(transform);
+        newHeart.transform.SetParent(transform,false);
         Heart heartComponent = newHeart.GetComponent<Heart>();
         heartComponent.ChangeState(status);
         hearts.Add(heartComponent);

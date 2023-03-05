@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class Fog : Enemy
@@ -14,12 +12,6 @@ public class Fog : Enemy
     private int m_direct,m_count,m_pastDirect;
     private float m_velocJumpY,m_velocJumpX,m_jumpTime,m_time,m_ratioBetweenAndY,m_x,m_y;
     private bool m_isJumped;
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     protected override void Start()
     {
         m_ratioBetweenAndY = 3 / 1;

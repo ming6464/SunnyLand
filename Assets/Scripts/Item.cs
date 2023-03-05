@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -20,6 +19,7 @@ public class Item : MonoBehaviour
 
     public void Collected()
     {
+        AudioManager.Ins.PlayAudio(TagAndKey.AUDIO_COLLECT,true);
         m_anim.SetTrigger(ANIM_FEEDBACK);
         m_coll.enabled = false;
     }

@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class Enemy : MonoBehaviour
 {
@@ -28,8 +24,11 @@ public class Enemy : MonoBehaviour
     }
     public void End()
     {
-        isDeath = true;
-        anim.SetTrigger("Death");
+        if (!isDeath)
+        {
+            isDeath = true;
+            anim.SetTrigger("Death");
+        }
     }
 
     private void Death()

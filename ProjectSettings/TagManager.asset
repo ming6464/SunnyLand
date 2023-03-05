@@ -16,6 +16,7 @@ TagManager:
   - BlackHole
   - AudioSource
   - NextChap
+  - Win
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 public class Dialog : MonoBehaviour
@@ -24,6 +22,9 @@ public class Dialog : MonoBehaviour
                 break;
             case TagAndKey.STATE_DIALOGPAUSE:
                 resumeBtn.SetActive(true);
+                break;
+            case TagAndKey.STATE_DIALOGFINISH:
+                curChapterText.text = "Finish";
                 break;
         }
     }

@@ -9,9 +9,9 @@ public class GameManager : Singleton<GameManager>
     public GameObject blackHolePanel;
     public BlackHole backHole;
     public Tilemap tlm_ground, tlm_wall;
-    public bool isOverGame,isUseSkill,isScreenHome;
+    public bool isOverGame,isUseSkill,isScreenHome,isLastChapter,isPause;
     public Dialog dialog;
-    public int amountBlackHole;
+    public int amountBlackHole,nextLevel;
     private int m_countMouseClick,m_score;
     private Vector3 m_mouseClickPos;
     private BlackHole m_backHoleA,m_backHoleB;
@@ -22,7 +22,12 @@ public class GameManager : Singleton<GameManager>
     
     public override void Start()
     {
-        if (isScreenHome) return;
+        if (isScreenHome)
+        {
+            AudioManager.Ins.PlayAudio(TagAndKey.AUDIO_MUSICIDLE,false);
+            return;
+        }
+        AudioManager.Ins.PlayAudio(TagAndKey.AUDIO_MUSICPLAYGAME,false);
         UIManager.Ins.UpdateScoreOrSkill(amountBlackHole,TagAndKey.STATE_BLACKHOLE);
         UIManager.Ins.UpdateScoreOrSkill(m_score, TagAndKey.STATE_SCORE);
         m_animBlackHole = blackHolePanel.GetComponent<Animator>();
@@ -78,7 +83,8 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         Time.timeScale = 0f;
-        AudioManager.Ins.PlayAudioEffect(3,0.5f);
+        AudioManager.Ins.StopMusic();
+        AudioManager.Ins.PlayAudio(TagAndKey.AUDIO_OVER, true);
         isOverGame = true;
         dialog.ShowDialog(TagAndKey.STATE_DIALOGOVER,true);
     }
@@ -89,17 +95,26 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(scene);
     }
 
-    public void Finish()
+    public void Win()
     {
+        
         Time.timeScale = 0f;
-        AudioManager.Ins.PlayAudioEffect(9,0.5f);
+        AudioManager.Ins.StopMusic();
+        AudioManager.Ins.PlayAudio(TagAndKey.AUDIO_WIN, true);
+        if (isLastChapter)
+        {
+            dialog.ShowDialog(TagAndKey.STATE_DIALOGFINISH,true);
+            return;
+        }
+        PrefConst.Ins.LastLevel = nextLevel;
         dialog.ShowDialog(TagAndKey.STATE_DIALOGWIN,true);
     }
 
     public void GamePause(bool isPause)
     {
+        this.isPause = isPause;
         Time.timeScale = 0f;
-        AudioManager.Ins.PauseMusic(isPause);
+        AudioManager.Ins.PauseOrResumeMusic(isPause);
         if(isPause)
             dialog.ShowDialog(TagAndKey.STATE_DIALOGPAUSE,true);
         else
@@ -113,7 +128,7 @@ public class GameManager : Singleton<GameManager>
 
     public void UseBlackHole()
     {
-        if (amountBlackHole > 0 && !isUseSkill)
+        if (!isOverGame && !isPause && !isUseSkill && amountBlackHole > 0)
         {
             isUseSkill = true;
             m_countMouseClick++;
@@ -125,7 +140,11 @@ public class GameManager : Singleton<GameManager>
 
     private bool CheckTileAtPos(Vector3 pos)
     {
-        bool check = tlm_ground.GetTile(tlm_ground.WorldToCell(pos))|| tlm_wall.GetTile(tlm_wall.WorldToCell(pos));
+        bool check = false;
+        if (tlm_wall)
+            check = tlm_wall.GetTile(tlm_wall.WorldToCell(pos));
+        if (!check && tlm_ground)
+            check = tlm_ground.GetTile(tlm_ground.WorldToCell(pos));
         return !check;
     }
 

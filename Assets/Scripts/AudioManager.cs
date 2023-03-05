@@ -1,47 +1,63 @@
-using System.Collections;
+using System;
 using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    public AudioClip auc_jump, auc_colect, auc_death, auc_finsh;
-    private AudioSource m_aus;
-
-
-    public override void Awake()
+    public Sound[] sfxSound, musicSound;
+    public AudioSource musicSource, sfxSource;
+    public override void Start()
     {
+        musicSource.loop = true;
+        sfxSource.volume = PrefConst.Ins.SfxAudioVol;
+        musicSource.volume = PrefConst.Ins.MusicAudioVol;
+    }
+    
+    public void PlayAudio(string name, bool isSFX)
+    {
+        Sound sound;
+        if (isSFX)
+        {
+            if (!sfxSource) return;
+            sound = Array.Find(sfxSound, s => string.Equals(s.name, name));
+            if (sound != null)
+            {
+                sfxSource.PlayOneShot(sound.auc);
+            }
+            return;
+        }
+        if(!musicSource) return;
+        sound = Array.Find(musicSound, s => string.Equals(name, s.name));
+        if (sound != null)
+        {
+            musicSource.Stop();
+            musicSource.clip = sound.auc;
+            musicSource.Play();
+        }
         
     }
 
-    public override void Start()
-    {
-        m_aus = GetComponent<AudioSource>();
-    }
-    
-    public void PlayAudioEffect(int state,float vol)
-    {
-        switch (state)
-        {
-            case 1:
-                m_aus.PlayOneShot(auc_jump,vol);
-                break;
-            case 2:
-                m_aus.PlayOneShot(auc_colect,vol);
-                break;
-            case 3:
-                m_aus.Stop();
-                m_aus.PlayOneShot(auc_death,vol);
-                break;
-            default:
-                m_aus.Stop();
-                m_aus.PlayOneShot(auc_finsh,vol);
-                break;
-        }
-    }
-
-    public void PauseMusic(bool isPause)
+    public void PauseOrResumeMusic(bool isPause)
     {
         if(isPause)
-            m_aus.Pause();
-        else m_aus.Play();
+            musicSource.Pause();
+        else musicSource.Play();
     }
+
+    public void StopMusic()
+    {
+        if(musicSource) musicSource.Stop();
+    }
+
+    public void AudioVol(float vol,bool isSFX)
+    {
+        if (isSFX)
+        {
+            PrefConst.Ins.SfxAudioVol = vol;
+            sfxSource.volume = vol;
+            return;
+        }
+        PrefConst.Ins.MusicAudioVol = vol;
+        musicSource.volume = vol;
+    }
+
 }

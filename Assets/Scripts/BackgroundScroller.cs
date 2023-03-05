@@ -1,16 +1,16 @@
-using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class BackgroundScroller : MonoBehaviour
 {
     public float speed;
-    public float maxX = 18.83f, minX = -18.39f;
-
+    [SerializeField]
+    private Renderer m_rend;
+    
     private void Update()
     {
-        if (transform.position.x <= minX)
-            transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
-        transform.Translate(Vector3.left * Time.deltaTime * speed);
+        if (m_rend)
+        {
+            m_rend.material.mainTextureOffset += new Vector2(Time.deltaTime * speed, 0);
+        }
     }
 }

@@ -1,13 +1,14 @@
-using System;
 using UnityEngine;
 
 public class PlayerCol : MonoBehaviour
 {
     private Player m_player;
     private Rigidbody2D m_rg;
+    private int curIdItem;
 
     private void Start()
     {
+        curIdItem = this.GetInstanceID();
         m_player = GetComponent<Player>();
     }
     private void OnCollisionEnter2D(Collision2D col)
@@ -29,24 +30,30 @@ public class PlayerCol : MonoBehaviour
             m_player.heart = 0;
             m_player.Death();
         }
-        else if (col.gameObject.CompareTag(TagAndKey.T_FINISH))
+        else if (col.gameObject.CompareTag(TagAndKey.T_WIN))
         {
-            m_player.isFinish = true;
-            GameManager.Ins.Finish();
+            m_player.isWin = true;
+            GameManager.Ins.Win();
         }
         else
         {
             if (!m_player.isHurt && col.gameObject.CompareTag(TagAndKey.T_DEATHPOINTENEMY))
             {
+                AudioManager.Ins.PlayAudio(TagAndKey.AUDIO_KILLENEMY,true);
                 m_player.JumpKillEnemy();
                 gObj.transform.parent.gameObject.GetComponent<Enemy>().End();
             }
             if (gObj.CompareTag(TagAndKey.T_ITEM))
             {
-                Item item = gObj.GetComponent<Item>();
-                item.Collected();
-                GameManager.Ins.IncreaseScore(item.STATE);
-                AudioManager.Ins.PlayAudioEffect(2,0.22f);
+                if (curIdItem != gObj.gameObject.GetInstanceID())
+                {
+                    curIdItem = gObj.gameObject.GetInstanceID();
+                    Item item = gObj.GetComponent<Item>();
+                    item.Collected();
+                    GameManager.Ins.IncreaseScore(item.STATE);
+                    
+                }
+                
             }
         }
     }
